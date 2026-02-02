@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Triagem – Recomeçar é para todos</title>
+
+<style>
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #dfeee8, #f4f9f7);
+    padding: 30px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.10);
+}
+
+h1 {
+    text-align: center;
+    color: #2f5d50;
+}
+
+h2 {
+    margin-top: 35px;
+    color: #3c6e63;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 6px;
+}
+
+.passos {
+    background: #eef6f3;
+    border-left: 6px solid #3c6e63;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    color: #2f5d50;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+select, textarea, input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    margin-top: 40px;
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    background: #3c6e63;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2f5d50;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 13px;
+    color: #666;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Triagem Socioeconômica</h1>
+<p style="text-align:center; color:#555;">
+Projeto <strong>“Recomeçar é para todos.”</strong><br>
+Formulário confidencial para fins de avaliação socioeconômica e psicológica.
+</p>
+
+<div class="passos">
+<strong>Como enviar o formulário:</strong>
+<ol>
+<li>Preencha todas as perguntas com atenção e sinceridade.</li>
+<li>Ao final, clique no botão <em>“Enviar formulário”</em>.</li>
+<li>Seu aplicativo de e-mail abrirá automaticamente.</li>
+<li>Apenas confirme o envio do e-mail — não é necessário anexar nada.</li>
+</ol>
+</div>
+
+<form onsubmit="enviarFormulario(); return false;">
+
+<h2>Identificação</h2>
+<label>Nome completo:
+<input type="text" id="nome" required>
+</label>
+
+<label>Idade:
+<input type="number" id="idade" min="18" max="100">
+</label>
+
+<h2>Composição Familiar</h2>
+<label>Quantas pessoas dependem financeiramente de você?
+<select id="dependentes">
+<option value="0">Nenhuma (apenas eu)</option>
+<option value="1">1 pessoa</option>
+<option value="2">2 pessoas</option>
+<option value="3">3 pessoas</option>
+<option value="4">4 ou mais pessoas</option>
+</select>
+</label>
+
+<h2>Renda e Sustento</h2>
+<label>Renda familiar mensal aproximada:
+<select id="renda">
+<option value="5">Sem renda fixa</option>
+<option value="4">Até 1 salário mínimo</option>
+<option value="3">Entre 1 e 2 salários mínimos</option>
+<option value="2">Entre 2 e 3 salários mínimos</option>
+<option value="0">Acima de 3 salários mínimos</option>
+</select>
+</label>
+
+<label>Principal fonte de renda:
+<select id="trabalho">
+<option value="4">Atualmente sem atividade remunerada</option>
+<option value="3">Atividade informal / eventual</option>
+<option value="2">Autônomo</option>
+<option value="0">Emprego formal</option>
+</select>
+</label>
+
+<h2>Moradia</h2>
+<label>Situação atual de moradia:
+<select id="moradia">
+<option value="4">Moradia instável ou temporária</option>
+<option value="3">Cedida por terceiros</option>
+<option value="2">Alugada</option>
+<option value="1">Própria financiada</option>
+<option value="0">Própria quitada</option>
+</select>
+</label>
+
+<h2>Acesso a Cuidados em Saúde Mental</h2>
+<label>No momento, você consegue arcar com psicoterapia particular?
+<select id="terapia">
+<option value="4">Não consigo</option>
+<option value="3">Apenas valores sociais</option>
+<option value="1">Com bastante dificuldade</option>
+<option value="0">Sem dificuldade significativa</option>
+</select>
+</label>
+
+<h2>Aspectos de Vulnerabilidade (se aplicável)</h2>
+<label><input type="checkbox" class="vuln"> Endividamento significativo</label>
+<label><input type="checkbox" class="vuln"> Vivência recente de violência ou ameaça</label>
+<label><input type="checkbox" class="vuln"> Processo recente de luto ou perda importante</label>
+<label><input type="checkbox" class="vuln"> Sofrimento psíquico intenso</label>
+<label><input type="checkbox" class="vuln"> Uso prejudicial de álcool ou outras substâncias</label>
+
+<h2>Observações (opcional)</h2>
+<label>Se desejar, deixe uma breve observação:
+<textarea id="obs" rows="4"></textarea>
+</label>
+
+<button type="submit">Enviar formulário</button>
+</form>
+
+<div class="footer">
+Projeto “Recomeçar é para todos.”<br>
+Este formulário não substitui avaliação clínica.
+</div>
+
+</div>
+
+<script>
+function enviarFormulario() {
+
+    let total =
+        parseInt(renda.value) +
+        parseInt(dependentes.value) +
+        parseInt(trabalho.value) +
+        parseInt(moradia.value) +
+        parseInt(terapia.value);
+
+    document.querySelectorAll(".vuln:checked").forEach(() => total += 1);
+
+    let classificacao = "";
+    if (total >= 24) classificacao = "Prioridade MUITO ALTA";
+    else if (total >= 18) classificacao = "Prioridade ALTA";
+    else if (total >= 12) classificacao = "Prioridade MÉDIA";
+    else classificacao = "Prioridade BAIXA";
+
+    let corpoEmail =
+        "Projeto: Recomeçar é para todos.%0D%0A%0D%0A" +
+        "Nome: " + nome.value + "%0D%0A" +
+        "Idade: " + idade.value + "%0D%0A" +
+        "Pontuação total: " + total + "%0D%0A" +
+        "Classificação: " + classificacao + "%0D%0A%0D%0A" +
+        "Observações:%0D%0A" + obs.value;
+
+    window.location.href =
+        "mailto:81DIEGONASCIMENTODNS@GMAIL.COM" +
+        "?subject=Triagem Socioeconômica – Recomeçar é para todos" +
+        "&body=" + corpoEmail;
+}
+</script>
+
+</body>
+</html>
